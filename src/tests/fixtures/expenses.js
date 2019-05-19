@@ -7,7 +7,8 @@ export default  [{
     note:'',
     amount:100,
     createdAt:0
-},{
+},
+{
     id:'2',
     description:'def',
     note:'',
