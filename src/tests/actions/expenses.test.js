@@ -1,12 +1,22 @@
-import {removeExpense, editExpense, addExpense, startAddExpense} from '../../actions/expenses'
+import {removeExpense, editExpense, addExpense, startAddExpense, setExpenses, startSetExpenses} from '../../actions/expenses'
 import expenses from '../fixtures/expenses'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { database } from '../../firebase/firebase';
+import  database  from '../../firebase/firebase';
+import expensesReducer from '../../reducers/expenses'
 
 //jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000; // 10 second timeout
 
 const createMockStore = configureMockStore([thunk])
+
+beforeEach((done)=>{
+    const expensesData = {}
+    expenses.forEach(({id, description, note, amount, createdAt})=>{
+        expensesData[id]={description, note, amount, createdAt}
+    })
+    database.ref('expenses').set(expensesData).then(()=>done())
+})
+
 
 test('should setup remove expense action object',()=>{
 
@@ -102,8 +112,46 @@ test('Should add expense to database with default data', (done)=>{
     }).then((snapshot)=>{
         expect(snapshot.val()).toEqual(dataExpense)
        done()
-    }).catch((err) => {})
+    }).catch((err) => {
+        console.log(err)
+    })
 
+})
+
+test('should setup set expense action object with data', ()=>{
+
+    const action = setExpenses(expenses)
+    expect(action).toEqual({
+        type:'SET_EXPENSES',
+        expenses
+    })
+})
+
+test('should set expense', ()=> {
+    const action = {
+        type:'SET_EXPENSES',
+        expenses:[expenses[1]]
+    }
+
+    const state = expensesReducer(expenses,action)
+    expect(state).toEqual([expenses[1]])
+})
+
+test('should fetch the expenses from firebase',(done)=>{
+    const store = createMockStore({})
+
+    store.dispatch(startSetExpenses()).then(()=>{
+        const action = store.getActions()
+
+        expect(action[0]).toEqual(
+            {
+                type:'SET_EXPENSES',
+                expenses
+            }
+        )
+
+        done()
+    })
 })
 
 // test('should setup add expense default state action object', ()=>{
