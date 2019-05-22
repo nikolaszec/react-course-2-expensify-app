@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /home/nikolas/.yarn/bin/yarn.js add redux-mock-store@1.2.3
+  /usr/local/bin/node /home/nikolas/.yarn/bin/yarn.js add history@4.9.0
 
 PATH: 
   /home/nikolas/.yarn/bin:/home/nikolas/.config/yarn/global/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -27,7 +27,7 @@ npm manifest:
       "build:dev": "webpack",
       "build:prod": "webpack -p --env production",
       "dev-server": "webpack-dev-server",
-      "test": "jest --config=jest.config.json",
+      "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
       "start": "node server/server.js",
       "heroku-postbuild": "yarn run build:prod"
     },
@@ -40,6 +40,7 @@ npm manifest:
       "babel-preset-env": "1.6.1",
       "babel-preset-react": "6.24.1",
       "css-loader": "2.1.1",
+      "dotenv": "8.0.0",
       "express": "4.17.0",
       "extract-text-webpack-plugin": "^4.0.0-beta.0",
       "firebase": "6.0.2",
@@ -56,6 +57,7 @@ npm manifest:
       "react-redux": "7.0.3",
       "react-router-dom": "5.0.0",
       "redux": "4.0.1",
+      "redux-mock-store": "1.2.3",
       "redux-thunk": "2.3.0",
       "sass-loader": "7.1.0",
       "style-loader": "0.23.1",
@@ -65,6 +67,7 @@ npm manifest:
       "webpack-cli": "^3.3.2"
     },
     "devDependencies": {
+      "cross-env": "5.2.0",
       "enzyme": "3.0.0",
       "enzyme-adapter-react-16": "1.0.0",
       "enzyme-to-json": "3.0.1",
@@ -2348,6 +2351,14 @@ Lockfile:
       fbjs "^0.8.0"
       gud "^1.0.0"
   
+  cross-env@5.2.0:
+    version "5.2.0"
+    resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.2.0.tgz#6ecd4c015d5773e614039ee529076669b9d126f2"
+    integrity sha512-jtdNFfFW1hB7sMhr/H6rW1Z45LFqyI431m3qU6bFXcQ3Eh7LtBuG3h74o7ohHZ3crrRkkqHlo4jYHFPcjroANg==
+    dependencies:
+      cross-spawn "^6.0.5"
+      is-windows "^1.0.0"
+  
   cross-spawn@^3.0.0:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-3.0.1.tgz#1256037ecb9f0c5f79e3d6ef135e30770184b982"
@@ -2711,6 +2722,11 @@ Lockfile:
     dependencies:
       dom-serializer "0"
       domelementtype "1"
+  
+  dotenv@8.0.0:
+    version "8.0.0"
+    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+    integrity sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
   
   duplexify@^3.4.2, duplexify@^3.6.0:
     version "3.7.1"
@@ -4310,7 +4326,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
     integrity sha1-Sw2hRCEE0bM2NA6AeX6GXPOffXI=
   
-  is-windows@^1.0.1, is-windows@^1.0.2:
+  is-windows@^1.0.0, is-windows@^1.0.1, is-windows@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/is-windows/-/is-windows-1.0.2.tgz#d1850eb9791ecd18e6182ce12a30f396634bb19d"
     integrity sha512-eXK1UInq2bPmjyX6e3VHIzMLobc4J94i4AWn+Hpq3OU5KkrRC96OAcR3PRJ/pGu6m8TRnBHP9dkXQVsT/COVIA==
@@ -6611,6 +6627,11 @@ Lockfile:
     dependencies:
       indent-string "^2.1.0"
       strip-indent "^1.0.1"
+  
+  redux-mock-store@1.2.3:
+    version "1.2.3"
+    resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.2.3.tgz#1b3ad299da91cb41ba30d68e3b6f024475fb9e1b"
+    integrity sha1-GzrSmdqRy0G6MNaOO28CRHX7nhs=
   
   redux-thunk@2.3.0:
     version "2.3.0"
